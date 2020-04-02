@@ -14,10 +14,10 @@ exports.main = async (event, context) => {
     },
     body: JSON.stringify({ //把json数据（对象）解析成字符串
       files: [{
-        "name": "Main.java",
+        "name": event.filename,
         "content": event.content
       }],
-      stdin: "",
+      stdin: event.stdin,
       command: ""
     })
   })

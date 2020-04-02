@@ -1,45 +1,56 @@
 <!--pages/exercise/exercise.wxml-->
-
-<view class="weui-form">
-	<view class="weui-form__text-area">
-		<h1 class="weui-form__title">来编程练习吧！</h1>
-	</view>
-	<view class="weui-form__control-area">
-		<view class="weui-cells__group weui-cells__group_form">
-			<view class="weui-cells">
-				<view class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
-					<view class="weui-cell__hd">
-						<label class="weui-label" style="width: 3em">语言</label>
+<form bindsubmit="bindFormSubmit">
+	<view class="weui-form">
+		<view class="weui-form__text-area">
+			<h1 class="weui-form__title">来编程练习吧！</h1>
+		</view>
+		<view class="weui-form__control-area">
+			<view class="weui-cells__group weui-cells__group_form">
+				<view class="weui-cells">
+					<view class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+						<view class="weui-cell__hd">
+							<label class="weui-label" style="width: 3em">语言</label>
+						</view>
+						<view class="weui-cell__bd">
+							<picker bindchange="bindPickerChange" range="{{languages}}">
+								<view class="weui-select">{{languages[index]}}</view>
+							</picker>
+						</view>
 					</view>
-					<view class="weui-cell__bd">
-						<picker bindchange="bindPickerChange" range="{{languages}}">
-							<view class="weui-select">{{languages[index]}}</view>
-						</picker>
+					<view class="weui-cell weui-cell_active">
+						<view class="weui-cell__hd">
+							<label class="weui-label">文件名</label>
+						</view>
+						<view class="weui-cell__bd">
+							<input class="weui-input" name="filename" placeholder="必填" placeholder-class="weui-input__placeholder" />
+						</view>
+					</view>
+					<view class="weui-cell weui-cell_active">
+						<view class="weui-cell__hd">
+							<label class="weui-label">标准输入</label>
+						</view>
+						<view class="weui-cell__bd">
+							<input class="weui-input" name="stdin" placeholder="传入控制台的输入" placeholder-class="weui-input__placeholder" />
+						</view>
+					</view>
+					<view class="weui-cells__group weui-cells__group_form">
+						<view class="weui-cells weui-cells_form">
+							<view class="weui-cell ">
+								<view class="weui-cell__bd">
+									<textarea placeholder="请输入代码" auto-height maxlength="-1" name="textarea" />
+									<view class="weui-textarea-counter"><text></text></view>
+						</view>
 					</view>
 				</view>
-				<view class="weui-cell weui-cell_active">
-					<view class="weui-cell__hd">
-						<label class="weui-label">文件名</label>
-					</view>
-					<view class="weui-cell__bd">
-						<input class="weui-input" placeholder="必填" placeholder-class="weui-input__placeholder" />
-					</view>
-				</view>
-				<view class="weui-cell weui-cell_active">
-					<view class="weui-cell__hd">
-						<label class="weui-label">标准输入</label>
-					</view>
-					<view class="weui-cell__bd">
-						<input class="weui-input" placeholder="传入控制台的输入" placeholder-class="weui-input__placeholder" />
-					</view>
+			</view>
 				</view>
 			</view>
 		</view>
 	</view>
-</view>
-<view>
-	<form bindsubmit="bindFormSubmit">
-		<textarea placeholder="请输入代码" auto-height maxlength="-1" name="textarea" />
-		<button type="default" form-type="submit"> 提交 </button>
-  </form>
-</view>
+	<view class="weui-cell weui-cell_active">
+	<button type="primary" form-type="submit">提交</button>
+	</view>
+	<view class="weui-form__opr-area">
+	<button type="warn" form-type="reset">清空</button>
+	</view>
+</form>

@@ -7,7 +7,9 @@ Page({
   data: {
     languages: ['Java', 'C', 'Python'],
     index: 0,
-    setLang: "java"
+    setLang: "java",
+    filename: "Main.java",
+    stdin: ""
   },
 
   bindPickerChange: function (e) {
@@ -22,6 +24,8 @@ Page({
       name: 'glot', //云函数名为http
       data: {
         language: this.data.setLang,
+        filename: e.detail.value.filename,
+        stdin: e.detail.value.stdin,
         content: e.detail.value.textarea
       },
     }).then(res => { //Promise

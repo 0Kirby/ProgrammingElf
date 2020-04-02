@@ -1,0 +1,10 @@
+/* pages/exercise/exercise.wxss */
+textarea {
+  height: 100%;
+  width: 100%;
+  min-height: 32px;
+  /* 设置 min-height 是为了设置 textarea 的高度 */
+  /* 因为行内样式优先级比较高，所以曲线救国 */
+  font-size: 16px;
+  line-height: 16px;
+}

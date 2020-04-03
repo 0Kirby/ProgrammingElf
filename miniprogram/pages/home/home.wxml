@@ -1,2 +1,13 @@
 <!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<view class="event-list" wx:for="{{questions}}" wx:key="key">
+    <navigator url="/pages/detail/detail" class="event-link">        
+        <view class="event-content">
+            <view class="event-title">{{item.title}}</view>
+            <view class="event-desc">{{item.content}}</view>
+            <view class="event-box">
+                <view class="event-address">时间</view>
+                <view class="event-time">{{item.time}}</view>
+            </view>
+        </view>
+    </navigator>
+</view>

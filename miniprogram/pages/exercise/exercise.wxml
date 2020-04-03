@@ -51,7 +51,7 @@
                             <textarea placeholder="运行结果将会显示在这里" value="{{result}}" disabled="true" auto-height maxlength="-1" name="result" />
                         </view>
                     </view>
-                    <view class="weui-cell weui-cell_active">
+                    <view class="weui-cell">
                         <button type="primary" form-type="submit">提交</button>
                     </view>
                     <view class="weui-form__opr-area">

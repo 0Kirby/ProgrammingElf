@@ -53,8 +53,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/exercise/exercise",
-					"pathName": "pages/exercise/exercise",
+					"name": "pages/detail/detail",
+					"pathName": "pages/detail/detail",
 					"query": "",
 					"scene": null
 				}

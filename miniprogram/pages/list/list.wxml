@@ -1,2 +1,12 @@
 <!--pages/list/list.wxml-->
-<text>pages/list/list.wxml</text>
+<view class="event-list">
+	<navigator url="\\" class="event-link">
+		<view class="event-img">
+			<image mode="widthFix" src="/images/done-blank.png" style="height:auto"></image>
+		</view>
+		<view class="event-content">
+			<view class="event-title">空空如也</view>
+			<view class="event-desc">还没有已完成的编程任务!</view>
+		</view>
+	</navigator>
+</view>

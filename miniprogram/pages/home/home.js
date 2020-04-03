@@ -16,7 +16,6 @@ Page({
     const db = wx.cloud.database() //获取数据库的引用
     const _ = db.command //获取数据库查询及更新指令
     db.collection("questions") //获取集合questions的引用
-
       .limit(10) //限制显示多少条记录，这里为10
       .get() //获取根据查询条件筛选后的集合数据  
       .then(res => {

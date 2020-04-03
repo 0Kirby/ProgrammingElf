@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    loading: false,
     languages: ['Java', 'C', 'Python'],
     index: 0,
     setLang: 'java',
@@ -29,6 +30,9 @@ Page({
   },
 
   bindFormSubmit: function (e) {
+    this.setData({
+      loading: true
+    })
     wx.cloud.callFunction({ //调用云函数
       name: 'glot', //云函数名为http
       data: {
@@ -39,21 +43,10 @@ Page({
       },
     }).then(res => { //Promise
       this.setData({
+        loading: false,
         result: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +
           JSON.parse(res.result).error
       })
-    })
-  },
-
-  bindFormReset: function () {
-    this.setData({
-      index: 0,
-      setLang: '',
-      filename: '',
-      stdin: '',
-      content: '',
-      code: '',
-      result: ''
     })
   },
 

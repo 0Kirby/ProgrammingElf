@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    toast: false,
+    hideToast: false,
     loading: false,
     languages: ['Java', 'C', 'Python'],
     index: 0,
@@ -17,6 +19,23 @@ Page({
     ],
     code: '',
     result: ''
+  },
+
+  openToast: function () {
+    this.setData({
+      toast: true
+    });
+    setTimeout(() => {
+      this.setData({
+        hideToast: true
+      });
+      setTimeout(() => {
+        this.setData({
+          toast: false,
+          hideToast: false,
+        });
+      }, 300);
+    }, 1000);
   },
 
   bindPickerChange: function (e) {
@@ -42,6 +61,7 @@ Page({
         content: e.detail.value.textarea
       },
     }).then(res => { //Promise
+      this.openToast()
       this.setData({
         loading: false,
         result: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +

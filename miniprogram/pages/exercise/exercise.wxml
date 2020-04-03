@@ -1,4 +1,11 @@
 <!--pages/exercise/exercise.wxml-->
+<view class="fadeIn {{hideToast ? 'fadeOut' : ''}}" wx:if="{{toast}}">
+	<view class="weui-mask_transparent"></view>
+	<view class="weui-toast">
+		<i class="weui-icon-success-no-circle weui-icon_toast"></i>
+		<view class="weui-toast__content">执行完毕</view>
+	</view>
+</view>
 <view class="weui-form">
 	<view class="weui-form__text-area">
 		<h1 class="weui-form__title">来编程练习吧！</h1>

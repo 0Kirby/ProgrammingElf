@@ -5,6 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    topTips: false,
+    hideTopTips: false,
+    topTipsColor: "",
+    colors: ["weui-toptips_warn", "weui-toptips_done"],
+    hint: "",
+    messages: ["结果错误！", "结果正确！"],
+    toast: false,
+    hideToast: false,
     loading: false,
     languages: ['Java', 'C', 'Python'],
     index: 0,
@@ -21,6 +29,40 @@ Page({
     content: '',
     input: '',
     output: ''
+  },
+
+  openToast: function () {
+    this.setData({
+      toast: true
+    });
+    setTimeout(() => {
+      this.setData({
+        hideToast: true
+      });
+      setTimeout(() => {
+        this.setData({
+          toast: false,
+          hideToast: false,
+        });
+      }, 300);
+    }, 1000);
+  },
+
+  openTopTips: function () {
+    this.setData({
+      topTips: true
+    });
+    setTimeout(() => {
+      this.setData({
+        hideTopTips: true
+      });
+      setTimeout(() => {
+        this.setData({
+          topTips: false,
+          hideTopTips: false,
+        });
+      }, 300);
+    }, 3000);
   },
 
   bindPickerChange: function (e) {
@@ -46,6 +88,18 @@ Page({
         content: e.detail.value.textarea
       },
     }).then(res => { //Promise
+      if (JSON.parse(res.result).stdout == this.data.output)
+        this.setData({
+          topTipsColor: this.data.colors[1],
+          hint: this.data.messages[1],
+        })
+      else
+        this.setData({
+          topTipsColor: this.data.colors[0],
+          hint: this.data.messages[0],
+        })
+      this.openTopTips()
+      this.openToast()
       this.setData({
         loading: false,
         result: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +

@@ -8,3 +8,7 @@ textarea {
   font-size: 16px;
   line-height: 16px;
 }
+
+.weui-toptips {
+  display: block
+}

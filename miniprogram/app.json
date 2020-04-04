@@ -5,7 +5,9 @@
     "pages/login/login",
     "pages/list/list",
     "pages/exercise/exercise",
-    "pages/me/me"
+    "pages/about/about",
+    "pages/me/me",
+    "pages/user/user"
   ],
   "window": {
     "backgroundColor": "#1E88E5",

@@ -1,4 +1,4 @@
-// pages/exercise/exercise.js
+// pages/user/user.js
 Page({
 
   /**
@@ -8,7 +8,7 @@ Page({
     toast: false,
     hideToast: false,
     loading: false,
-    languages: ['Java', 'C', 'Python'],
+    types: ['学生', '教师'],
     index: 0,
     setLang: 'java',
     filenames: ['Main.java', 'main.c', 'main.py'],
@@ -41,10 +41,7 @@ Page({
   bindPickerChange: function (e) {
     this.setData({
       index: e.detail.value,
-      setLang: this.data.languages[e.detail.value].toLowerCase(),
-      filename: this.data.filenames[e.detail.value],
-      code: this.data.codes[e.detail.value],
-      result: ''
+      type: this.data.types[e.detail.value]
     })
   },
 
@@ -52,32 +49,29 @@ Page({
     this.setData({
       loading: true
     })
-    wx.cloud.callFunction({ //调用云函数
-      name: 'glot', //云函数名为glot
-      data: {
-        language: this.data.setLang,
-        filename: e.detail.value.filename,
-        stdin: e.detail.value.stdin,
-        content: e.detail.value.textarea
-      },
-    }).then(res => { //Promise
-      this.openToast()
-      this.setData({
-        loading: false,
-        result: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +
-          JSON.parse(res.result).error
-      })
-    })
+    // wx.cloud.callFunction({ //调用云函数
+    //   name: 'glot', //云函数名为glot
+    //   data: {
+    //     language: this.data.setLang,
+    //     filename: e.detail.value.filename,
+    //     stdin: e.detail.value.stdin,
+    //     content: e.detail.value.textarea
+    //   },
+    // }).then(res => { //Promise
+    //   this.openToast()
+    //   this.setData({
+    //     loading: false,
+    //     result: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +
+    //       JSON.parse(res.result).error
+    //   })
+    // })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      filename: this.data.filenames[0],
-      code: this.data.codes[0]
-    })
+
   },
 
   /**

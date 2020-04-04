@@ -30,18 +30,31 @@ Page({
     }, 2000);
   },
 
-  getUserInfomation: function (event) {    
-    if (event.detail.userInfo) {//用户按了允许授权按钮
+  getUserInfomation: function (event) {
+    if (event.detail.userInfo) { //用户按了允许授权按钮
       this.setData({
         topTipsColor: this.data.colors[1],
         hint: this.data.messages[1],
       })
-      this.openTopTips()
+      wx.cloud.callFunction({
+          name: 'login',
+          data: {},
+          success: res => {
+            wx.setStorage({
+              key: "openid",
+              data: res.result.openid
+            })
+          },
+          fail: err => {
+            console.error('[云函数] [login] 调用失败', err)
+          }
+        }),
+        this.openTopTips()
       getApp().globalData.userInfo = event.detail.userInfo
       wx.switchTab({
         url: '/pages/home/home',
       })
-    } else {//用户按了拒绝按钮
+    } else { //用户按了拒绝按钮
       this.setData({
         topTipsColor: this.data.colors[0],
         hint: this.data.messages[0],

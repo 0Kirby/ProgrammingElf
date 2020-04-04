@@ -24,7 +24,7 @@
 	},
 	"appid": "wx0fd9ee978e9cb691",
 	"projectname": "ProgrammingElf",
-	"libVersion": "2.10.3",
+	"libVersion": "2.10.4",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
@@ -53,8 +53,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/login/login",
-					"pathName": "pages/login/login",
+					"name": "pages/user/user",
+					"pathName": "pages/user/user",
 					"query": "",
 					"scene": null
 				}

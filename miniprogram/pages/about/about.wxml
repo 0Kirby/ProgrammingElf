@@ -1,0 +1,17 @@
+<!--pages/about/about.wxml-->
+<view id="imgsection">
+  <view class="imglist">
+    <view class="imglist">
+      <image class="circle" mode="widthFix" src="../../images/toon.png"></image>
+    </view>
+  </view>
+  <view class="weui-form__text-area">
+			<h1 class="weui-form__title">小林卡比</h1>
+      	<view class="weui-form__desc"></view>
+      <h1 class="weui-form__title">0Kirby</h1>
+			<view class="weui-form__desc">Android Java C/C++ 软件工程 通信工程 日语</view>
+		</view>
+  <view class="text">只有去尝试了，才有可能成功</view>
+  <view class="text">GitHub:0Kirby</view>
+</view>
+<button type="primary" bindtap="tapClose">关闭</button>

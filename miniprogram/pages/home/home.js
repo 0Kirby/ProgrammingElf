@@ -22,6 +22,12 @@ Page({
             url: '/pages/login/login',
           })
         } else {
+          wx.getUserInfo({
+            lang:"zh_CN",
+            success(res){
+              getApp().globalData.userInfo = res
+            }
+          })
           const db = wx.cloud.database() //获取数据库的引用
           const _ = db.command //获取数据库查询及更新指令
           db.collection("questions") //获取集合questions的引用

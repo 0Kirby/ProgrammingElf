@@ -1,2 +1,31 @@
 <!--pages/me/me.wxml-->
-<text>pages/me/me.wxml</text>
+<view class="weui-cells">
+	<navigator url="/pages/user/user">
+		<view class="weui-cell weui-cell_active weui-cell_access">
+			<view class="weui-cell__hd" style="position: relative; margin-right: 10px;">
+				<image src="{{userInfo.avatarUrl}}" style="width: 50px; display: block;"></image>
+			</view>
+			<view class="weui-cell__bd">
+				<view>{{userInfo.nickName}}</view>
+				<view style="font-size: 13px; color: #888;">{{userInfo.province}} {{userInfo.city}}</view>
+			</view>
+			<view class="weui-cell__ft"></view>
+		</view>
+	</navigator>
+  <navigator url="/pages/login/login">
+	<view class="weui-cell weui-cell_active weui-cell_access">
+		<view class="weui-cell__bd">
+			<text style="vertical-align: middle;">重新登录</text>
+		</view>
+		<view class="weui-cell__ft"></view>
+	</view>
+  </navigator>
+  <navigator url="/pages/about/about">
+	<view class="weui-cell weui-cell_active weui-cell_access">
+		<view class="weui-cell__bd">
+			<text style="vertical-align: middle;">关于作者</text>
+		</view>
+		<view class="weui-cell__ft"></view>
+	</view>
+  </navigator>
+</view>

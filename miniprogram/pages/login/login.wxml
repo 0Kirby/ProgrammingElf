@@ -1,0 +1,12 @@
+<!--pages/login/login.wxml-->
+<view wx:if="{{topTips}}" class="weui-toptips {{topTipsColor}} fadeIn {{hideTopTips ? 'fadeOut' : ''}}">{{hint}}</view>
+<view id="imgsection">
+  <view class="imglist">
+    <view class="imglist">
+      <image class="circle" mode="widthFix" src="../../images/exercise-blue.png"></image>
+    </view>
+  </view>
+  <view class="title">“云编程小精灵”是一个面向校园与课堂的云编程工具，支持教师在云编程小精灵中添加编程题目，学生可作答并得到结果。</view>
+  <view class="title">本小程序通过识别不同的用户从而分配对应的题目给你，并能将你的解答进行记录，所以需要使用你的微信用户信息进行登录，如果拒绝授权将无法使用。</view>
+</view>
+<button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfomation">点击授权用户信息</button>

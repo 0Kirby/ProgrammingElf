@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/home",
     "pages/detail/detail",
+    "pages/login/login",
     "pages/list/list",
     "pages/exercise/exercise",
     "pages/me/me"
@@ -10,7 +11,7 @@
     "backgroundColor": "#1E88E5",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#1E88E5",
-    "navigationBarTitleText": "编程小精灵",
+    "navigationBarTitleText": "云编程小精灵",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {

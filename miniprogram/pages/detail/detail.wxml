@@ -20,7 +20,7 @@
 						<label class="weui-label" style="width: 3em">语言</label>
 					</view>
 					<view class="weui-cell__bd">
-						<picker bindchange="bindPickerChange" range="{{languages}}">
+						<picker bindchange="bindPickerChange" value="{{index}}" range="{{languages}}">
 							<view class="weui-select">{{languages[index]}}</view>
 						</picker>
 					</view>

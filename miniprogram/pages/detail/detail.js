@@ -15,8 +15,8 @@ Page({
     hideToast: false,
     loading: false,
     languages: ['Java', 'C', 'Python'],
-    index: 0,
-    setLang: 'java',
+    index: '',
+    setLang: '',
     filenames: ['Main.java', 'main.c', 'main.py'],
     filename: '',
     codes: ['public class Main {\n    public static void main(String[] args) {\n        System.out.println("Java版Hello World!");\n    }\n}',
@@ -124,16 +124,16 @@ Page({
           title: res.data[0].title,
           content: res.data[0].content,
           input: res.data[0].input,
-          output: res.data[0].output
+          output: res.data[0].output,
+          index: res.data[0].language,
+          setLang: this.data.languages[res.data[0].language].toLowerCase(),
+          filename: this.data.filenames[res.data[0].language],
+          code: this.data.codes[res.data[0].language]
         })
       })
       .catch(err => {
         console.error(err)
       })
-    this.setData({
-      filename: this.data.filenames[0],
-      code: this.data.codes[0]
-    })
   },
 
   /**

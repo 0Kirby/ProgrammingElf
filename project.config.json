@@ -53,8 +53,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/user/user",
-					"pathName": "pages/user/user",
+					"name": "pages/list/list",
+					"pathName": "pages/list/list",
 					"query": "",
 					"scene": null
 				}

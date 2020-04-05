@@ -6,7 +6,7 @@
 		</view>
 		<view class="event-content">
 			<view class="event-title">空空如也</view>
-			<view class="event-desc">还没有已完成的编程任务!</view>
+			<view class="event-desc">还没有待完成的编程任务!</view>
 		</view>
 	</navigator>
 </view>
@@ -22,12 +22,12 @@
 	</navigator>
 </view>
 <view wx:if="{{length==1}}" class="event-list" wx:for="{{questions}}" wx:key="key">
-	<navigator url="/pages/detail/detail?id={{item._id}}" class="event-link">
+	<navigator url="/pages/detail/detail?id={{item._id}}&aid=" class="event-link">
 		<view class="event-content">
 			<view class="event-title">{{item.title}}</view>
 			<view class="event-desc">{{item.content}}</view>
 			<view class="event-box">
-				<view class="event-address">创建时间</view>
+				<view class="event-address">创建于</view>
 				<view class="event-time">{{item.time}}</view>
 			</view>
 		</view>

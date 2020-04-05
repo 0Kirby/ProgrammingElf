@@ -1,18 +1,42 @@
 // pages/list/list.js
+var util = require('../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    questions: [],
+    length: 1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const db = wx.cloud.database() //获取数据库的引用
+    db.collection("answers") //获取集合answers的引用
+      .where({
+        _openid: getApp().globalData.openid
+      })
+      .get() //获取根据查询条件筛选后的集合数据  
+      .then(res => {
+        if (res.data.length > 0) {
+          res.data.forEach(v => {
+            v.time = util.formatTime(v.time)
+          })
+          this.setData({
+            length: res.data.length,
+            questions: res.data
+          })
+        } else
+          this.setData({
+            length: 0
+          })
+      })
+      .catch(err => {
+        console.error(err)
+      })
   },
 
   /**

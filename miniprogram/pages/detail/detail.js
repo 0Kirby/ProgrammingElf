@@ -29,7 +29,8 @@ Page({
     content: '',
     input: '',
     output: '',
-    qid: ''
+    qid: '',
+    aid: ''
   },
 
   openToast: function () {
@@ -106,6 +107,8 @@ Page({
             input: e.detail.value.textarea,
             output: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +
               JSON.parse(res.result).error,
+            title: this.data.title,
+            time: new Date()
           }
         })
         .then(res => {})
@@ -126,6 +129,9 @@ Page({
   onLoad: function (options) {
     const db = wx.cloud.database() //获取数据库的引用
     const _ = db.command //获取数据库查询及更新指令
+    this.setData({
+      aid: options.aid
+    })
     db.collection("questions") //获取集合questions的引用
       .where({
         _id: options.id
@@ -141,8 +147,18 @@ Page({
           index: res.data[0].language,
           setLang: this.data.languages[res.data[0].language].toLowerCase(),
           filename: this.data.filenames[res.data[0].language],
-          code: this.data.codes[res.data[0].language]
         })
+        if (this.data.aid != '') {
+          db.collection('answers').doc(this.data.aid).get().then(res => {
+            this.setData({
+              code: res.data.input,
+              result: res.data.output
+            })
+          })
+        } else
+          this.setData({
+            code: this.data.codes[0]
+          })
       })
       .catch(err => {
         console.error(err)

@@ -7,6 +7,7 @@ Page({
    */
   data: {
     questions: [],
+    finish: [],
     school: '',
     college: '',
     class: '',
@@ -70,10 +71,30 @@ Page({
                     this.setData({
                       questions: res.data
                     })
-                  }else
-                  this.setData({
-                    length: -1
-                  })
+                    db.collection("answers") //获取集合answers的引用
+                      .where({
+                        _openid: getApp().globalData.openid
+                      })
+                      .get() //获取根据查询条件筛选后的集合数据  
+                      .then(res => {
+                        var temp = this.data.questions
+                        for (var i = 0; i < res.data.length; ++i) {
+                          for (var j = 0; j < temp.length; ++j)
+                            if (temp[j]._id === res.data[i].question)
+                              temp.splice(j, 1)
+                        }
+                        this.setData({
+                          questions: temp,
+                          length: temp.length === 0 ? -1 : temp.length
+                        })
+                      })
+                      .catch(err => {
+                        console.error(err)
+                      })
+                  } else
+                    this.setData({
+                      length: -1
+                    })
                 })
                 .catch(err => {
                   console.error(err)
@@ -85,6 +106,7 @@ Page({
         }
       }
     })
+
   },
 
   /**

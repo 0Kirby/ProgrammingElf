@@ -13,9 +13,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this
     wx.getSetting({
-      success: function (res) {
+      success: (res) => {
         if (!res.authSetting['scope.userInfo']) {
           //未登录,跳转到登录页
           wx.redirectTo({
@@ -37,7 +36,7 @@ Page({
               res.data.forEach(v => {
                 v.time = util.formatTime(v.time)
               })
-              that.setData({
+              this.setData({
                 questions: res.data
               })
             })

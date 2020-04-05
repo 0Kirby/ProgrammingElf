@@ -10,15 +10,13 @@ Page({
     loading: false,
     types: ['学生', '教师'],
     index: 0,
-    setLang: 'java',
-    filenames: ['Main.java', 'main.c', 'main.py'],
-    filename: '',
-    codes: ['public class Main {\n    public static void main(String[] args) {\n        System.out.println("Java版Hello World!");\n    }\n}',
-      '#include <stdio.h>\n\n  int main() {\n      printf("C版Hello World!\\n");\n      return 0;\n  }',
-      'print("Python版Hello World!")'
-    ],
-    code: '',
-    result: ''
+    name: '',
+    school: '',
+    number: '',
+    class: '',
+    course: '',
+    oid: '',
+    length: 0
   },
 
   openToast: function () {
@@ -46,32 +44,88 @@ Page({
   },
 
   bindFormSubmit: function (e) {
+    const db = wx.cloud.database()
     this.setData({
       loading: true
     })
-    // wx.cloud.callFunction({ //调用云函数
-    //   name: 'glot', //云函数名为glot
-    //   data: {
-    //     language: this.data.setLang,
-    //     filename: e.detail.value.filename,
-    //     stdin: e.detail.value.stdin,
-    //     content: e.detail.value.textarea
-    //   },
-    // }).then(res => { //Promise
-    //   this.openToast()
-    //   this.setData({
-    //     loading: false,
-    //     result: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +
-    //       JSON.parse(res.result).error
-    //   })
-    // })
+    if (this.data.length === 0)
+      db.collection('users').add({
+        data: {
+          type: e.detail.value.type,
+          name: e.detail.value.name,
+          number: e.detail.value.number,
+          school: e.detail.value.school,
+          college: e.detail.value.college,
+          class: e.detail.value.class,
+          course: e.detail.value.course
+        }
+      })
+      .then(res => {
+        this.openToast()
+        this.setData({
+          loading: false
+        })
+      })
+      .catch(console.error)
+    else
+      db.collection('users').where({
+        _openid: this.data.openid
+      }).update({
+        data: {
+          type: e.detail.value.type,
+          name: e.detail.value.name,
+          number: e.detail.value.number,
+          school: e.detail.value.school,
+          college: e.detail.value.college,
+          class: e.detail.value.class,
+          course: e.detail.value.course
+        }
+      })
+      .then(res => {
+        this.openToast()
+        this.setData({
+          loading: false
+        })
+      })
+      .catch(console.error)
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const db = wx.cloud.database() //获取数据库的引用
+    const _ = db.command //获取数据库查询及更新指令
+    wx.getStorage({
+      key: 'openid',
+      success: (res) => {
+        this.setData({
+          openid: res.data
+        })
+      }
+    })
+    db.collection("users") //获取集合users的引用
+      .where({
+        _openid: this.data.openid
+      })
+      .get() //获取根据查询条件筛选后的集合数据  
+      .then(res => {
+        if (res.data.length > 0)
+          this.setData({
+            length: res.data.length,
+            index: res.data[0].type,
+            type: this.data.types[res.data[0].type],
+            name: res.data[0].name,
+            number: res.data[0].number,
+            school: res.data[0].school,
+            college: res.data[0].college,
+            class: res.data[0].class,
+            course: res.data[0].course
+          })
+      })
+      .catch(err => {
+        console.error(err)
+      })
   },
 
   /**

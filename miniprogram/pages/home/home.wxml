@@ -1,13 +1,35 @@
 <!--pages/home/home.wxml-->
-<view class="event-list" wx:for="{{questions}}" wx:key="key">
-    <navigator url="/pages/detail/detail?id={{item._id}}" class="event-link">        
-        <view class="event-content">
-            <view class="event-title">{{item.title}}</view>
-            <view class="event-desc">{{item.content}}</view>
-            <view class="event-box">
-                <view class="event-address">时间</view>
-                <view class="event-time">{{item.time}}</view>
-            </view>
-        </view>
-    </navigator>
+<view wx:if="{{length==-1}}" class="event-list">
+	<navigator url="\\" class="event-link">
+		<view class="event-img">
+			<image mode="widthFix" src="/images/inbox-zero.png" style="height:auto"></image>
+		</view>
+		<view class="event-content">
+			<view class="event-title">空空如也</view>
+			<view class="event-desc">还没有已完成的编程任务!</view>
+		</view>
+	</navigator>
+</view>
+<view wx:if="{{length==0}}" class="event-list" wx:for="{{questions}}" wx:key="key">
+	<navigator url="//" class="event-link">
+		<view class="event-img">
+			<image mode="widthFix" src="/images/saved-blank.png" style="height:auto"></image>
+		</view>
+		<view class="event-content">
+			<view class="event-title">{{item.title}}</view>
+			<view class="event-desc">{{item.content}}</view>
+		</view>
+	</navigator>
+</view>
+<view wx:if="{{length==1}}" class="event-list" wx:for="{{questions}}" wx:key="key">
+	<navigator url="/pages/detail/detail?id={{item._id}}" class="event-link">
+		<view class="event-content">
+			<view class="event-title">{{item.title}}</view>
+			<view class="event-desc">{{item.content}}</view>
+			<view class="event-box">
+				<view class="event-address">创建时间</view>
+				<view class="event-time">{{item.time}}</view>
+			</view>
+		</view>
+	</navigator>
 </view>

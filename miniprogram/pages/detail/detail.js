@@ -28,7 +28,8 @@ Page({
     title: '',
     content: '',
     input: '',
-    output: ''
+    output: '',
+    qid: ''
   },
 
   openToast: function () {
@@ -76,11 +77,12 @@ Page({
   },
 
   bindFormSubmit: function (e) {
+    const db = wx.cloud.database()
     this.setData({
       loading: true
     })
     wx.cloud.callFunction({ //调用云函数
-      name: 'glot', //云函数名为http
+      name: 'glot', //云函数名为glot
       data: {
         language: this.data.setLang,
         filename: e.detail.value.filename,
@@ -98,6 +100,16 @@ Page({
           topTipsColor: this.data.colors[0],
           hint: this.data.messages[0],
         })
+      db.collection('answers').add({
+          data: {
+            question: this.data.qid,
+            input: e.detail.value.textarea,
+            output: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +
+              JSON.parse(res.result).error,
+          }
+        })
+        .then(res => {})
+        .catch(console.error)
       this.openTopTips()
       this.openToast()
       this.setData({
@@ -116,11 +128,12 @@ Page({
     const _ = db.command //获取数据库查询及更新指令
     db.collection("questions") //获取集合questions的引用
       .where({
-        _id: _.eq(options.id)
+        _id: options.id
       })
       .get() //获取根据查询条件筛选后的集合数据  
       .then(res => {
         this.setData({
+          qid: res.data[0]._id,
           title: res.data[0].title,
           content: res.data[0].content,
           input: res.data[0].input,

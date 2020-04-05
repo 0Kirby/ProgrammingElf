@@ -6,7 +6,7 @@
 		</view>
 		<view class="event-content">
 			<view class="event-title">空空如也</view>
-			<view class="event-desc">还没有已完成的编程任务!</view>
+			<view class="event-desc">还没有待完成的编程任务!</view>
 		</view>
 	</navigator>
 </view>

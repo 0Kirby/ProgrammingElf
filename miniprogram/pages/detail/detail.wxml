@@ -20,7 +20,7 @@
 						<label class="weui-label" style="width: 3em">语言</label>
 					</view>
 					<view class="weui-cell__bd">
-						<picker bindchange="bindPickerChange" value="{{index}}" range="{{languages}}">
+						<picker bindchange="bindPickerChange" value="{{index}}" range="{{languages}}" disabled="true">
 							<view class="weui-select">{{languages[index]}}</view>
 						</picker>
 					</view>
@@ -34,7 +34,7 @@
 							<label class="weui-label">文件名</label>
 						</view>
 						<view class="weui-cell__bd">
-							<input class="weui-input" name="filename" value="{{filename}}" placeholder="必填" placeholder-class="weui-input__placeholder" />
+							<input class="weui-input" name="filename" disabled="true" value="{{filename}}" placeholder="必填" placeholder-class="weui-input__placeholder" />
 						</view>
 					</view>
 					<view class="weui-cell weui-cell_active">
@@ -42,7 +42,7 @@
 							<label class="weui-label">标准输入</label>
 						</view>
 						<view class="weui-cell__bd">
-							<input class="weui-input" name="stdin" value="{{input}}" placeholder="传入控制台的输入" placeholder-class="weui-input__placeholder" />
+							<input class="weui-input" name="stdin" disabled="true" value="{{input}}" placeholder="传入控制台的输入" placeholder-class="weui-input__placeholder" />
 						</view>
 					</view>
 					<view class="weui-cells__group weui-cells__group_form">

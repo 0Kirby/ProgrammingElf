@@ -63,6 +63,7 @@ Page({
       .then(res => {
         this.openToast()
         this.setData({
+          length: 1,
           loading: false
         })
       })

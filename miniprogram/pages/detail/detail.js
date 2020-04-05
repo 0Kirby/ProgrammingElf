@@ -101,7 +101,8 @@ Page({
           topTipsColor: this.data.colors[0],
           hint: this.data.messages[0],
         })
-      db.collection('answers').add({
+      if (this.data.aid == '')
+        db.collection('answers').add({
           data: {
             question: this.data.qid,
             input: e.detail.value.textarea,
@@ -111,7 +112,22 @@ Page({
             time: new Date()
           }
         })
-        .then(res => {})
+        .then(res => {
+          this.setData({
+            aid: res._id
+          })
+        })
+        .catch(console.error)
+      else
+        db.collection('answers').doc(this.data.aid).update({
+          data: {
+            input: e.detail.value.textarea,
+            output: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +
+              JSON.parse(res.result).error,
+            time: new Date()
+          }
+        })
+        .then(console.log)
         .catch(console.error)
       this.openTopTips()
       this.openToast()

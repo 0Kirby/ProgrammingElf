@@ -87,6 +87,7 @@ Page({
                           questions: temp,
                           length: temp.length === 0 ? -1 : temp.length//如果长度为0，则设为-1表示空，否则保存实际长度
                         })
+                        console.log(this.data.length)
                       })
                       .catch(err => {
                         console.error(err)

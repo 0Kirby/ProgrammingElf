@@ -21,7 +21,7 @@
 		</view>
 	</navigator>
 </view>
-<view wx:if="{{length==1}}" class="event-list" wx:for="{{questions}}" wx:key="key"><!--正常情况-->
+<view wx:if="{{length>=1}}" class="event-list" wx:for="{{questions}}" wx:key="key"><!--正常情况-->
 	<navigator url="/pages/detail/detail?id={{item._id}}&aid=" class="event-link">
 		<view class="event-content">
 			<view class="event-title">{{item.title}}</view>

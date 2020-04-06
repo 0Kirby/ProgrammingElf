@@ -21,11 +21,11 @@ Page({
     result: ''
   },
 
-  openToast: function () {
+  openToast: function () {//开启弹窗
     this.setData({
       toast: true
     });
-    setTimeout(() => {
+    setTimeout(() => {//设置延时
       this.setData({
         hideToast: true
       });
@@ -38,7 +38,7 @@ Page({
     }, 1000);
   },
 
-  bindPickerChange: function (e) {
+  bindPickerChange: function (e) {//选择器事件响应
     this.setData({
       index: e.detail.value,
       setLang: this.data.languages[e.detail.value].toLowerCase(),
@@ -48,7 +48,7 @@ Page({
     })
   },
 
-  bindFormSubmit: function (e) {
+  bindFormSubmit: function (e) {//提交表单
     this.setData({
       loading: true
     })

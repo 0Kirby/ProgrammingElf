@@ -1,5 +1,5 @@
 <!--pages/exercise/exercise.wxml-->
-<view class="fadeIn {{hideToast ? 'fadeOut' : ''}}" wx:if="{{toast}}">
+<view class="fadeIn {{hideToast ? 'fadeOut' : ''}}" wx:if="{{toast}}"><!--执行完毕提示-->
 	<view class="weui-mask_transparent"></view>
 	<view class="weui-toast">
 		<i class="weui-icon-success-no-circle weui-icon_toast"></i>
@@ -26,7 +26,7 @@
 				<view class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
 					<view class="weui-cell__hd"></view>
 				</view>
-				<form bindsubmit="bindFormSubmit">
+				<form bindsubmit="bindFormSubmit"><!--表单-->
 					<view class="weui-cell weui-cell_active">
 						<view class="weui-cell__hd">
 							<label class="weui-label">文件名</label>

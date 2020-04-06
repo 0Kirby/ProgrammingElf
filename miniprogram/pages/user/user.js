@@ -19,11 +19,11 @@ Page({
     length: 0
   },
 
-  openToast: function () {
+  openToast: function () {//开启弹窗
     this.setData({
       toast: true
     });
-    setTimeout(() => {
+    setTimeout(() => {//设置延时
       this.setData({
         hideToast: true
       });
@@ -36,19 +36,19 @@ Page({
     }, 1000);
   },
 
-  bindPickerChange: function (e) {
+  bindPickerChange: function (e) {//选择器事件响应
     this.setData({
       index: e.detail.value,
       type: this.data.types[e.detail.value]
     })
   },
 
-  bindFormSubmit: function (e) {
+  bindFormSubmit: function (e) {//提交表单
     const db = wx.cloud.database()
     this.setData({
       loading: true
     })
-    if (this.data.length === 0)
+    if (this.data.length === 0)//长度为0表示新建，采用add，否则用update
       db.collection('users').add({
         data: {
           type: e.detail.value.type,
@@ -61,7 +61,7 @@ Page({
         }
       })
       .then(res => {
-        getApp().globalData.refreshHome = true
+        getApp().globalData.refreshHome = true//需要刷新首页
         this.openToast()
         this.setData({
           length: 1,
@@ -84,7 +84,7 @@ Page({
         }
       })
       .then(res => {
-        getApp().globalData.refreshHome = true
+        getApp().globalData.refreshHome = true//需要刷新首页
         this.openToast()
         this.setData({
           loading: false
@@ -100,14 +100,14 @@ Page({
     const db = wx.cloud.database() //获取数据库的引用
     const _ = db.command //获取数据库查询及更新指令
     this.setData({
-      openid: getApp().globalData.openid
+      openid: getApp().globalData.openid//从全局数据中读取openid
     })
     db.collection("users") //获取集合users的引用
       .where({
         _openid: this.data.openid
       })
       .get() //获取根据查询条件筛选后的集合数据  
-      .then(res => {
+      .then(res => {//将初始数据写入表单
         if (res.data.length > 0)
           this.setData({
             length: res.data.length,

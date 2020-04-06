@@ -13,7 +13,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      userInfo: getApp().globalData.userInfo.userInfo
+      userInfo: getApp().globalData.userInfo.userInfo//从全局数据中读取openid
     })
   },
 

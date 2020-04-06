@@ -17,12 +17,12 @@ Page({
     const db = wx.cloud.database() //获取数据库的引用
     db.collection("answers") //获取集合answers的引用
       .where({
-        _openid: getApp().globalData.openid
+        _openid: getApp().globalData.openid//从全局数据查询openid
       })
       .get() //获取根据查询条件筛选后的集合数据  
       .then(res => {
         if (res.data.length > 0) {
-          res.data.forEach(v => {
+          res.data.forEach(v => {//对时间进行格式化
             v.time = util.formatTime(v.time)
           })
           this.setData({
@@ -50,7 +50,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (getApp().globalData.refreshList === true) {
+    if (getApp().globalData.refreshList === true) {//判断是否需要刷新
       getApp().globalData.refreshList = false
       this.onLoad()
     }

@@ -1,5 +1,5 @@
 <!--pages/login/login.wxml-->
-<view wx:if="{{topTips}}" class="weui-toptips {{topTipsColor}} fadeIn {{hideTopTips ? 'fadeOut' : ''}}">{{hint}}</view>
+<view wx:if="{{topTips}}" class="weui-toptips {{topTipsColor}} fadeIn {{hideTopTips ? 'fadeOut' : ''}}">{{hint}}</view><!--顶部提示-->
 <view id="imgsection">
   <view class="imglist">
     <view class="imglist">

@@ -1,12 +1,12 @@
 <!--pages/user/user.wxml-->
-<view class="fadeIn {{hideToast ? 'fadeOut' : ''}}" wx:if="{{toast}}">
+<view class="fadeIn {{hideToast ? 'fadeOut' : ''}}" wx:if="{{toast}}"><!--执行完毕提示-->
 	<view class="weui-mask_transparent"></view>
 	<view class="weui-toast">
 		<i class="weui-icon-success-no-circle weui-icon_toast"></i>
 		<view class="weui-toast__content">提交成功</view>
 	</view>
 </view>
-<form bindsubmit="bindFormSubmit">
+<form bindsubmit="bindFormSubmit"><!--表单-->
 	<view>
 		<view class="weui-cells__group weui-cells__group_form">
 			<view class="weui-cells">

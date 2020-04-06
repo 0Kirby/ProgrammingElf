@@ -1,5 +1,5 @@
 <!--pages/list/list.wxml-->
-<view wx:if="{{length>0}}" class="event-list" wx:for="{{questions}}" wx:key="key">
+<view wx:if="{{length>0}}" class="event-list" wx:for="{{questions}}" wx:key="key"><!--正常情况-->
 	<navigator url="/pages/detail/detail?id={{item.question}}&aid={{item._id}}" class="event-link">
 		<view class="event-content">
 			<view class="event-title">{{item.title}}</view>
@@ -11,7 +11,7 @@
 		</view>
 	</navigator>
 </view>
-<view wx:if="{{length==0}}" class="event-list">
+<view wx:if="{{length==0}}" class="event-list"><!--没有已完成的-->
 	<navigator url="\\" class="event-link">
 		<view class="event-img">
 			<image mode="widthFix" src="/images/done-blank.png" style="height:auto"></image>

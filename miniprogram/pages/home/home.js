@@ -27,13 +27,13 @@ Page({
             url: '/pages/login/login',
           })
         } else {
-          wx.getStorage({
+          wx.getStorage({//获取openid并存入全局数据
             key: 'openid',
             success: (res) => {
               getApp().globalData.openid = res.data
             }
           })
-          wx.getUserInfo({
+          wx.getUserInfo({//获取用户信息并存入全局数据
             lang: "zh_CN",
             success(res) {
               getApp().globalData.userInfo = res
@@ -43,11 +43,11 @@ Page({
           const _ = db.command //获取数据库查询及更新指令
           db.collection("users") //获取集合users的引用
             .where({
-              _openid: this.data.openid
+              _openid: this.data.openid//根据openid查询用户
             })
             .get() //获取根据查询条件筛选后的集合数据  
             .then(res => {
-              if (res.data.length > 0)
+              if (res.data.length > 0)//判断返回数据的长度
                 this.setData({
                   length: res.data.length,
                   school: res.data[0].school,
@@ -65,7 +65,7 @@ Page({
                 .get() //获取根据查询条件筛选后的集合数据  
                 .then(res => {
                   if (res.data.length > 0) {
-                    res.data.forEach(v => {
+                    res.data.forEach(v => {//对时间进行格式化操作
                       v.time = util.formatTime(v.time)
                     })
                     this.setData({
@@ -77,15 +77,15 @@ Page({
                       })
                       .get() //获取根据查询条件筛选后的集合数据  
                       .then(res => {
-                        var temp = this.data.questions
-                        for (var i = 0; i < res.data.length; ++i) {
+                        var temp = this.data.questions//临时保存问题
+                        for (var i = 0; i < res.data.length; ++i) {//遍历全部问题和已完成任务的数组
                           for (var j = 0; j < temp.length; ++j)
                             if (temp[j]._id === res.data[i].question)
-                              temp.splice(j, 1)
+                              temp.splice(j, 1)//从数组中去除已完成的任务
                         }
                         this.setData({
                           questions: temp,
-                          length: temp.length === 0 ? -1 : temp.length
+                          length: temp.length === 0 ? -1 : temp.length//如果长度为0，则设为-1表示空，否则保存实际长度
                         })
                       })
                       .catch(err => {
@@ -93,7 +93,7 @@ Page({
                       })
                   } else
                     this.setData({
-                      length: -1
+                      length: -1//表示空
                     })
                 })
                 .catch(err => {
@@ -119,7 +119,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (getApp().globalData.refreshHome === true) {
+    if (getApp().globalData.refreshHome === true) {//判断是否需要刷新数据
       getApp().globalData.refreshHome = false
       this.onLoad()
     }

@@ -33,11 +33,11 @@ Page({
     aid: ''
   },
 
-  openToast: function () {
+  openToast: function () {//开启弹窗
     this.setData({
       toast: true
     });
-    setTimeout(() => {
+    setTimeout(() => {//设置延时
       this.setData({
         hideToast: true
       });
@@ -50,11 +50,11 @@ Page({
     }, 1000);
   },
 
-  openTopTips: function () {
+  openTopTips: function () {//开启顶部提示
     this.setData({
       topTips: true
     });
-    setTimeout(() => {
+    setTimeout(() => {//设置延时
       this.setData({
         hideTopTips: true
       });
@@ -67,7 +67,7 @@ Page({
     }, 3000);
   },
 
-  bindPickerChange: function (e) {
+  bindPickerChange: function (e) {//选择器事件响应
     this.setData({
       index: e.detail.value,
       setLang: this.data.languages[e.detail.value].toLowerCase(),
@@ -77,9 +77,9 @@ Page({
     })
   },
 
-  bindFormSubmit: function (e) {
+  bindFormSubmit: function (e) {//提交表单
     const db = wx.cloud.database()
-    this.setData({
+    this.setData({//开始加载
       loading: true
     })
     wx.cloud.callFunction({ //调用云函数
@@ -91,7 +91,7 @@ Page({
         content: e.detail.value.textarea
       },
     }).then(res => { //Promise
-      if (JSON.parse(res.result).stdout == this.data.output)
+      if (JSON.parse(res.result).stdout == this.data.output)//判断结果是否正确，从而确定提示信息和颜色
         this.setData({
           topTipsColor: this.data.colors[1],
           hint: this.data.messages[1],
@@ -101,7 +101,7 @@ Page({
           topTipsColor: this.data.colors[0],
           hint: this.data.messages[0],
         })
-      if (this.data.aid == '') {
+      if (this.data.aid == '') {//判断是第一次回答还是修改以前的回答，从而确定是add还是update
         db.collection('answers').add({
             data: {
               question: this.data.qid,
@@ -118,8 +118,8 @@ Page({
             })
           })
           .catch(console.error)
-        getApp().globalData.refreshHome = true
-        getApp().globalData.refreshList = true
+        getApp().globalData.refreshHome = true//需要刷新首页
+        getApp().globalData.refreshList = true//需要刷新列表
       } else
         db.collection('answers').doc(this.data.aid).update({
           data: {
@@ -131,8 +131,8 @@ Page({
         })
         .then(console.log)
         .catch(console.error)
-      this.openTopTips()
-      this.openToast()
+      this.openTopTips()//开启顶部提示
+      this.openToast()//开启弹窗
       this.setData({
         loading: false,
         result: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +
@@ -166,7 +166,7 @@ Page({
           setLang: this.data.languages[res.data[0].language].toLowerCase(),
           filename: this.data.filenames[res.data[0].language],
         })
-        if (this.data.aid != '') {
+        if (this.data.aid != '') {//如果是查看以前的回答，加载以前的代码
           db.collection('answers').doc(this.data.aid).get().then(res => {
             this.setData({
               code: res.data.input,

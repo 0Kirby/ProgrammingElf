@@ -1,5 +1,5 @@
 <!--pages/home/home.wxml-->
-<view wx:if="{{length==-1}}" class="event-list">
+<view wx:if="{{length==-1}}" class="event-list"><!--判断是否没有符合条件的作业-->
 	<navigator url="\\" class="event-link">
 		<view class="event-img">
 			<image mode="widthFix" src="/images/inbox-zero.png" style="height:auto"></image>
@@ -10,7 +10,7 @@
 		</view>
 	</navigator>
 </view>
-<view wx:if="{{length==0}}" class="event-list" wx:for="{{questions}}" wx:key="key">
+<view wx:if="{{length==0}}" class="event-list" wx:for="{{questions}}" wx:key="key"><!--还没有进行用户信息设置-->
 	<navigator url="//" class="event-link">
 		<view class="event-img">
 			<image mode="widthFix" src="/images/saved-blank.png" style="height:auto"></image>
@@ -21,7 +21,7 @@
 		</view>
 	</navigator>
 </view>
-<view wx:if="{{length==1}}" class="event-list" wx:for="{{questions}}" wx:key="key">
+<view wx:if="{{length==1}}" class="event-list" wx:for="{{questions}}" wx:key="key"><!--正常情况-->
 	<navigator url="/pages/detail/detail?id={{item._id}}&aid=" class="event-link">
 		<view class="event-content">
 			<view class="event-title">{{item.title}}</view>

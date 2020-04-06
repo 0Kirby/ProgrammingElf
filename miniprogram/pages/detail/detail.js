@@ -101,24 +101,26 @@ Page({
           topTipsColor: this.data.colors[0],
           hint: this.data.messages[0],
         })
-      if (this.data.aid == '')
+      if (this.data.aid == '') {
         db.collection('answers').add({
-          data: {
-            question: this.data.qid,
-            input: e.detail.value.textarea,
-            output: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +
-              JSON.parse(res.result).error,
-            title: this.data.title,
-            time: new Date()
-          }
-        })
-        .then(res => {
-          this.setData({
-            aid: res._id
+            data: {
+              question: this.data.qid,
+              input: e.detail.value.textarea,
+              output: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +
+                JSON.parse(res.result).error,
+              title: this.data.title,
+              time: new Date()
+            }
           })
-        })
-        .catch(console.error)
-      else
+          .then(res => {
+            this.setData({
+              aid: res._id
+            })
+          })
+          .catch(console.error)
+        getApp().globalData.refreshHome = true
+        getApp().globalData.refreshList = true
+      } else
         db.collection('answers').doc(this.data.aid).update({
           data: {
             input: e.detail.value.textarea,
@@ -173,7 +175,7 @@ Page({
           })
         } else
           this.setData({
-            code: this.data.codes[0]
+            code: this.data.codes[this.data.index]
           })
       })
       .catch(err => {

@@ -17,7 +17,9 @@ App({
 
     this.globalData = {
       userInfo: null,
-      openid: ''
+      openid: '',
+      refreshHome: false,
+      refreshList: false
     }
   }
 })

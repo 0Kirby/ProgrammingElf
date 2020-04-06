@@ -61,6 +61,7 @@ Page({
         }
       })
       .then(res => {
+        getApp().globalData.refreshHome = true
         this.openToast()
         this.setData({
           length: 1,
@@ -83,6 +84,7 @@ Page({
         }
       })
       .then(res => {
+        getApp().globalData.refreshHome = true
         this.openToast()
         this.setData({
           loading: false
@@ -97,13 +99,8 @@ Page({
   onLoad: function (options) {
     const db = wx.cloud.database() //获取数据库的引用
     const _ = db.command //获取数据库查询及更新指令
-    wx.getStorage({
-      key: 'openid',
-      success: (res) => {
-        this.setData({
-          openid: res.data
-        })
-      }
+    this.setData({
+      openid: getApp().globalData.openid
     })
     db.collection("users") //获取集合users的引用
       .where({

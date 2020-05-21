@@ -24,7 +24,7 @@
 	},
 	"appid": "wx0fd9ee978e9cb691",
 	"projectname": "ProgrammingElf",
-	"libVersion": "2.10.4",
+	"libVersion": "2.11.1",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",

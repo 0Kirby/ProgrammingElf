@@ -13,9 +13,9 @@ Page({
     setLang: 'java',
     filenames: ['Main.java', 'main.c', 'main.py'],
     filename: '',
-    codes: ['public class Main {\n    public static void main(String[] args) {\n        System.out.println("Java版Hello World!");\n    }\n}',
-      '#include <stdio.h>\n\n  int main() {\n      printf("C版Hello World!\\n");\n      return 0;\n  }',
-      'print("Python版Hello World!")'
+    codes: ['public class Main {\n    public static void main(String[] args) {\n        System.out.print("Java版Hello World!");\n    }\n}',
+      '#include <stdio.h>\n\n  int main() {\n      printf("C版Hello World!");\n      return 0;\n  }',
+      'print("Python版Hello World!",end="")'
     ],
     code: '',
     result: ''

@@ -13,11 +13,11 @@ Page({
     messages: ["授权失败！请重新授权>w<", "授权成功！很快将跳转到主界面~"]
   },
 
-  openTopTips: function () {//开启顶部提示
+  openTopTips: function () { //开启顶部提示
     this.setData({
       topTips: true
     });
-    setTimeout(() => {//设置延时
+    setTimeout(() => { //设置延时
       this.setData({
         hideTopTips: true
       });
@@ -36,11 +36,11 @@ Page({
         topTipsColor: this.data.colors[1],
         hint: this.data.messages[1],
       })
-      wx.cloud.callFunction({//调用云函数获取openid
+      wx.cloud.callFunction({ //调用云函数获取openid
           name: 'login',
           data: {},
           success: res => {
-            wx.setStorage({//将openid存入storage
+            wx.setStorage({ //将openid存入storage
               key: "openid",
               data: res.result.openid
             })
@@ -50,8 +50,8 @@ Page({
           }
         }),
         this.openTopTips()
-      getApp().globalData.userInfo = event.detail.userInfo//将用户信息写入全局数据
-      wx.switchTab({//跳转到主界面
+      getApp().globalData.userInfo = event.detail.userInfo //将用户信息写入全局数据
+      wx.switchTab({ //跳转到主界面
         url: '/pages/home/home',
       })
     } else { //用户按了拒绝按钮

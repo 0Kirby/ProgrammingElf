@@ -12,7 +12,9 @@ Page({
     college: '',
     class: '',
     course: '',
-    length: 0
+    length: null,
+    notSet: null,
+    noRecord: null
   },
 
   /**
@@ -27,13 +29,13 @@ Page({
             url: '/pages/login/login',
           })
         } else {
-          wx.getStorage({//获取openid并存入全局数据
+          wx.getStorage({ //获取openid并存入全局数据
             key: 'openid',
             success: (res) => {
               getApp().globalData.openid = res.data
             }
           })
-          wx.getUserInfo({//获取用户信息并存入全局数据
+          wx.getUserInfo({ //获取用户信息并存入全局数据
             lang: "zh_CN",
             success(res) {
               getApp().globalData.userInfo = res
@@ -43,17 +45,23 @@ Page({
           const _ = db.command //获取数据库查询及更新指令
           db.collection("users") //获取集合users的引用
             .where({
-              _openid: this.data.openid//根据openid查询用户
+              _openid: this.data.openid //根据openid查询用户
             })
             .get() //获取根据查询条件筛选后的集合数据  
             .then(res => {
-              if (res.data.length > 0)//判断返回数据的长度
+              if (res.data.length > 0) //判断返回数据的长度
                 this.setData({
+                  notSet: false,
                   length: res.data.length,
                   school: res.data[0].school,
                   college: res.data[0].college,
                   class: res.data[0].class,
                   course: res.data[0].course
+                })
+              else
+                this.setData({
+                  notSet: true,
+                  length: 0,
                 })
               db.collection("questions") //获取集合questions的引用
                 .where({
@@ -65,7 +73,7 @@ Page({
                 .get() //获取根据查询条件筛选后的集合数据  
                 .then(res => {
                   if (res.data.length > 0) {
-                    res.data.forEach(v => {//对时间进行格式化操作
+                    res.data.forEach(v => { //对时间进行格式化操作
                       v.time = util.formatTime(v.time)
                     })
                     this.setData({
@@ -77,24 +85,32 @@ Page({
                       })
                       .get() //获取根据查询条件筛选后的集合数据  
                       .then(res => {
-                        var temp = this.data.questions//临时保存问题
-                        for (var i = 0; i < res.data.length; ++i) {//遍历全部问题和已完成任务的数组
+                        var temp = this.data.questions //临时保存问题
+                        for (var i = 0; i < res.data.length; ++i) { //遍历全部问题和已完成任务的数组
                           for (var j = 0; j < temp.length; ++j)
                             if (temp[j]._id === res.data[i].question)
-                              temp.splice(j, 1)//从数组中去除已完成的任务
+                              temp.splice(j, 1) //从数组中去除已完成的任务
                         }
                         this.setData({
                           questions: temp,
-                          length: temp.length === 0 ? -1 : temp.length//如果长度为0，则设为-1表示空，否则保存实际长度
+                          length: temp.length,
                         })
-                        console.log(this.data.length)
+                        if (temp.length > 0)
+                          this.setData({
+                            noRecord: false
+                          })
+                        else
+                          this.setData({
+                            noRecord: true
+                          })
                       })
                       .catch(err => {
                         console.error(err)
                       })
                   } else
                     this.setData({
-                      length: -1//表示空
+                      questions: [],
+                      noRecord: true
                     })
                 })
                 .catch(err => {
@@ -120,7 +136,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (getApp().globalData.refreshHome === true) {//判断是否需要刷新数据
+    if (getApp().globalData.refreshHome === true) { //判断是否需要刷新数据
       getApp().globalData.refreshHome = false
       this.onLoad()
     }

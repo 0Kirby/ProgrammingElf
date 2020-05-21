@@ -19,9 +19,9 @@ Page({
     setLang: '',
     filenames: ['Main.java', 'main.c', 'main.py'],
     filename: '',
-    codes: ['public class Main {\n    public static void main(String[] args) {\n        System.out.println("Java版Hello World!");\n    }\n}',
-      '#include <stdio.h>\n\n  int main() {\n      printf("C版Hello World!\\n");\n      return 0;\n  }',
-      'print("Python版Hello World!")'
+    codes: ['public class Main {\n    public static void main(String[] args) {\n        System.out.print("Java版Hello World!");\n    }\n}',
+      '#include <stdio.h>\n\n  int main() {\n      printf("C版Hello World!");\n      return 0;\n  }',
+      'print("Python版Hello World!",end="")'
     ],
     code: '',
     result: '',
@@ -119,7 +119,6 @@ Page({
           })
           .catch(console.error)
         getApp().globalData.refreshHome = true//需要刷新首页
-        getApp().globalData.refreshList = true//需要刷新列表
       } else
         db.collection('answers').doc(this.data.aid).update({
           data: {
@@ -133,6 +132,7 @@ Page({
         .catch(console.error)
       this.openTopTips()//开启顶部提示
       this.openToast()//开启弹窗
+      getApp().globalData.refreshList = true//需要刷新列表
       this.setData({
         loading: false,
         result: JSON.parse(res.result).stdout + JSON.parse(res.result).stderr +

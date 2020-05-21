@@ -1,5 +1,5 @@
 <!--pages/home/home.wxml-->
-<view wx:if="{{length==-1}}" class="event-list"><!--判断是否没有符合条件的作业-->
+<view wx:if="{{noRecord==true&&notSet==false}}" class="event-list"><!--判断是否没有符合条件的作业-->
 	<navigator url="\\" class="event-link">
 		<view class="event-img">
 			<image mode="widthFix" src="/images/inbox-zero.png" style="height:auto"></image>
@@ -10,14 +10,14 @@
 		</view>
 	</navigator>
 </view>
-<view wx:if="{{length==0}}" class="event-list" wx:for="{{questions}}" wx:key="key"><!--还没有进行用户信息设置-->
+<view wx:if="{{length==0&&notSet==true}}" class="event-list"><!--还没有进行用户信息设置-->
 	<navigator url="//" class="event-link">
 		<view class="event-img">
 			<image mode="widthFix" src="/images/saved-blank.png" style="height:auto"></image>
 		</view>
 		<view class="event-content">
-			<view class="event-title">{{item.title}}</view>
-			<view class="event-desc">{{item.content}}</view>
+			<view class="event-title">尚未设置用户信息</view>
+			<view class="event-desc">请点击下方的“我”，对学校、学院、班级和课程等信息进行设置！</view>
 		</view>
 	</navigator>
 </view>
